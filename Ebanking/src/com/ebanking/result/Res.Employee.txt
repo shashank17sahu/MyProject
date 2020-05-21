@@ -1,0 +1,5 @@
+Employer###LoginPa###Role###Branch###Result
+EmpCBIE###aaaaaa###CBImedCBI###CBIBranCBI$$$$Employer Already Existed...Try again
+EmpSBIE###bbbbbb###SBImedSBI###SBIBranSBI$$$$Employer Already Existed...Try again
+EmpPNBE###cccccc###PNBmedPNB###PNBBranPNB$$$$Employer Already Existed...Try again
+EmpUCOE###dddddd###UCOmedUCO###UCOBranUCO$$$$Employer Already Existed...Try again

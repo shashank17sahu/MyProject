@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.ebanking.master.ExeLib&apos; to &apos;ExeLibrary&apos;&#x0D;&#x0A;- Original project: &apos;Ebanking&apos;&#x0D;&#x0A;- Original element: &apos;com.ebanking.master.ExeLib&apos;&#x0D;&#x0A;- Renamed element: &apos;com.ebanking.master.ExeLibrary&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ExeLib&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.ebanking.master{ExeLib.java[ExeLib" matchStrategy="1" name="ExeLibrary" qualified="false" references="true" similarDeclarations="false" stamp="1590046470842" textual="false" version="1.0"/>
+</session>

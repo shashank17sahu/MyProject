@@ -1,0 +1,20 @@
+package com.ebanking.master;
+
+import java.io.IOException;
+
+public class ExeLibrary {
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+		//Instance class
+		Library lb=new Library();
+		String rval=lb.OpenApp("http://183.82.100.55/ranford2");
+		System.out.println(rval);
+		lb.AdminLogin("Admin", "M1ndq");
+		lb.BranchCre("medical", "Chowk", "square", "Ajni", "Ajni", "12345", "INDIA", "GOA", "GOA");
+		lb.RoleCre("medicalB","E");
+		lb.EmployeeCre("medicala", "chowk", "medicalchowk", "CBIBranCBI");
+		lb.AdmLogOut();
+		lb.AppClose();
+	}
+
+}

@@ -1,0 +1,11 @@
+package mvnpackage;
+
+public class MVN {
+
+	public static void main(String[] args) 
+	{
+		
+
+	}
+
+}

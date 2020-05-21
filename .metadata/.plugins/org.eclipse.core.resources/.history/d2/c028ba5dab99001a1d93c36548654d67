@@ -1,0 +1,65 @@
+package mvnproj;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+
+public class mvn
+{
+	WebDriver driver;
+	
+	@Test
+	public void OpenApp() throws InterruptedException
+	{
+		WebDriver driver=new FirefoxDriver();
+		driver.get("http://183.82.100.55/ranford2");
+		driver.manage().window().maximize();
+		driver.findElement(By.xpath("//*[@id=\"txtuId\"]")).sendKeys("Admin");
+		driver.findElement(By.xpath("//*[@id=\"txtPword\"]")).sendKeys("M1ndq");
+		driver.findElement(By.xpath("//*[@id=\"login\"]")).click();
+		Thread.sleep(1000);
+		//Branch Page
+		driver.findElement(By.xpath("//img[@src='images/Branches_but.jpg']")).click();
+		Thread.sleep(1000);
+		//New Branch Creation
+		driver.findElement(By.id("BtnNewBR")).click();
+		
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id=\"txtbName\"]")).sendKeys("medical");
+		driver.findElement(By.xpath("//*[@id=\"txtAdd1\"]")).sendKeys("Medical Chowk");
+		driver.findElement(By.xpath("//*[@id=\"txtZip\"]")).sendKeys("44000");
+		Select Ctry=new Select(driver.findElement(By.id("lst_counrtyU")));
+		Ctry.selectByVisibleText("INDIA");
+		Select state=new Select(driver.findElement(By.id("lst_stateI")));
+		state.selectByVisibleText("MAHARASTRA");
+		Select city=new Select(driver.findElement(By.id("lst_cityI")));
+		city.selectByVisibleText("MUMBAI");
+		
+		driver.findElement(By.xpath("//*[@id=\"btn_insert\"]")).click();
+		Thread.sleep(2000);
+		driver.switchTo().alert().accept();
+		
+	}
+	@Test
+	public void Role() throws InterruptedException
+	{
+		//Role Button
+		driver.findElement(By.xpath("//img[@src='images/Roles_but.jpg']")).click();
+		Thread.sleep(1000);
+		//New Role Creation
+		driver.findElement(By.xpath("//*[@id=\"btnRoles\"]")).click();
+		Thread.sleep(1000);
+		//Filling Details
+		driver.findElement(By.xpath("//*[@id=\"txtRname\"]")).sendKeys("medicalchowk");
+		driver.findElement(By.xpath("//*[@id=\"txtRDesc\"]")).sendKeys("medical chowk");
+		driver.findElement(By.xpath("/html/body/div/form/div/table[1]/tbody/tr[4]/td[2]/select/option[2]")).click();
+		driver.findElement(By.xpath("//*[@id=\"btninsert\"]")).click();
+		Thread.sleep(1000);
+		String alert=driver.switchTo().alert().getText();
+		System.out.println(alert);
+		driver.switchTo().alert().accept();
+		
+	}
+}

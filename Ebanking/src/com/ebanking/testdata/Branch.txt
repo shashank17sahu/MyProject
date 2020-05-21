@@ -1,0 +1,5 @@
+Branch###Name###Address1###Address2###Address3###AREA###ZIP###Country###State###City###Result
+CBIBranCBI###Chowk11###Square11###Medicall###Ajni###12345###INDIA###GOA###GOA
+SBIBranSBI###Chowk12###Square12###Medicall###Ajni###14789###INDIA###GOA###GOA
+PNBBranPNB###Chowk13###Square13###Medicall###Ajni###12569###INDIA###GOA###GOA
+UCOBranUCO###Chowk14###Square14###Medicall###Ajni###24589###INDIA###GOA###GOA

@@ -1,0 +1,17 @@
+package mvnpackage;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class MVN {
+
+	public static void main(String[] args) 
+	{
+		WebDriver driver=new FirefoxDriver();
+		driver.get("http://183.82.100.55/ranford2");
+		driver.manage().window().maximize();
+		
+
+	}
+
+}

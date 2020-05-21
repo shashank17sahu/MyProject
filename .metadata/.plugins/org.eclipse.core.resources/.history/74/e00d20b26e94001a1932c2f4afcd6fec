@@ -1,0 +1,184 @@
+package com.ebanking.master;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Library {
+	  public static WebDriver driver;
+	  public static String Expval,Actval;
+	  public static FileInputStream Fis;
+	  public static Properties Pr;
+	
+	public String OpenApp(String url) throws IOException
+	{
+		Fis=new FileInputStream("F:\\JAVA-SELENIUM\\Automation\\Ebanking\\src\\com\\ebanking\\properties\\Rep.properties");
+		Pr=new Properties();
+		Pr.load(Fis);
+		
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\SHASHANK\\Desktop\\geckodriver.exe");
+		
+		Expval="Ranford Bank";
+		driver=new FirefoxDriver();
+		
+		driver.get(url);
+		
+		driver.manage().window().maximize();
+		Actval=driver.findElement(By.xpath("/html/body/form/table/tbody/tr/td/table/tbody/tr[4]/td/table/tbody/tr[1]/td[4]/p/span")).getText();
+		System.out.println(driver.getTitle());
+		if(Expval.equalsIgnoreCase(Actval))
+		{
+			System.out.println("Ranford Application Launched");
+		}
+		else
+		{
+			System.out.println("Ranford Application not Launched");
+		}
+		
+		return "pass";
+	}
+	
+	
+	public String AdminLogin(String un,String pw) throws InterruptedException
+	{
+		driver.findElement(By.xpath(Pr.getProperty("Uname"))).sendKeys(un);
+		driver.findElement(By.xpath(Pr.getProperty("Password"))).sendKeys(pw);
+		driver.findElement(By.xpath(Pr.getProperty("Login"))).click();
+		Thread.sleep(1000);
+		Expval="Welcome to Admin";
+		Actval=driver.findElement(By.xpath("/html/body/table/tbody/tr/td/table/tbody/tr[4]/td/table/tbody/tr[1]/td[4]/strong/font/font")).getText();
+		if(Expval.equalsIgnoreCase(Actval))
+		{
+			System.out.println("Admin Login Successfully");
+		}
+		else
+		{
+			System.out.println("Admin Login Fail");
+		}
+		return pw;
+				
+	}
+	 
+	public String BranchCre(String branch,String add1,String add2,String add3,String area,String zip,String country,String State,String City) throws InterruptedException
+	{
+		Expval="Successful";
+		//Branch
+		driver.findElement(By.xpath(Pr.getProperty("BranchBtn"))).click();
+		Thread.sleep(1000);
+		//New Branch Creation
+		driver.findElement(By.id(Pr.getProperty("NBC"))).click();
+		
+		Thread.sleep(1000);
+		driver.findElement(By.xpath(Pr.getProperty("BranchName"))).sendKeys(branch);
+		driver.findElement(By.xpath(Pr.getProperty("Address1"))).sendKeys(add1);
+		driver.findElement(By.xpath(Pr.getProperty("Address2"))).sendKeys(add2);
+		driver.findElement(By.xpath(Pr.getProperty("Address3"))).sendKeys(add3);
+		driver.findElement(By.xpath(Pr.getProperty("Area"))).sendKeys(area);
+		driver.findElement(By.xpath(Pr.getProperty("ZipCode"))).sendKeys(zip);
+		Select Ctry=new Select(driver.findElement(By.id(Pr.getProperty("Country"))));
+		Ctry.selectByVisibleText(country);
+		Select state=new Select(driver.findElement(By.id(Pr.getProperty("State"))));
+		state.selectByVisibleText(State);
+		Select city=new Select(driver.findElement(By.id(Pr.getProperty("City"))));
+		city.selectByVisibleText(City);
+		
+		
+		driver.findElement(By.xpath(Pr.getProperty("BrSubmit"))).click();
+		Thread.sleep(1000);
+		Actval=driver.switchTo().alert().getText();
+		Thread.sleep(1000);
+		driver.switchTo().alert().accept();
+		
+		if(Actval.contains(Expval)) 
+		{
+		System.out.println("Branch Created");	
+		}
+		else
+		{
+			System.out.println("Branch Already Exist");
+		}
+		return Actval;
+			
+	}
+	public String RoleCre(String RName,String EorC) throws InterruptedException
+	{	
+		Expval="Successful";
+		//Role Button
+		driver.findElement(By.xpath(Pr.getProperty("RoleButton"))).click();
+		Thread.sleep(1000);
+		//New Role Creation
+		driver.findElement(By.xpath(Pr.getProperty("NewRoleCreation"))).click();
+		Thread.sleep(1000);
+		//Filling Details
+		driver.findElement(By.xpath(Pr.getProperty("RName"))).sendKeys(RName);
+		
+		Select city=new Select(driver.findElement(By.id(Pr.getProperty("RoleType"))));
+		city.selectByVisibleText(EorC);
+		driver.findElement(By.xpath(Pr.getProperty("RoleSubmit"))).click();
+		Thread.sleep(1000);
+		
+		Actval=driver.switchTo().alert().getText();
+		Thread.sleep(1000);
+		driver.switchTo().alert().accept();
+		if(Actval.contains(Expval))
+		{
+			System.out.println("Role Created");
+		}
+		else
+		{
+			System.out.println("Role Already Existed");
+		}
+		
+		return Actval;
+			
+	}
+	public String EmployeeCre(String Name,String Password,String ERole,String EBranch) throws InterruptedException
+	{	
+		Expval="Successful";
+		//Employee
+		driver.findElement(By.xpath(Pr.getProperty("Employee"))).click();
+		//New Employee
+		driver.findElement(By.xpath(Pr.getProperty("NewEmployee"))).click();
+		//filling details in employee
+		driver.findElement(By.xpath(Pr.getProperty("EmployerName"))).sendKeys(Name);
+		driver.findElement(By.xpath(Pr.getProperty("LoginPassword"))).sendKeys(Password);
+		Select role=new Select(driver.findElement(By.id(Pr.getProperty("EmRole"))));
+		role.selectByVisibleText(ERole);
+		Select branch=new Select(driver.findElement(By.id(Pr.getProperty("EmBranch"))));
+		branch.selectByVisibleText(EBranch);
+		driver.findElement(By.xpath(Pr.getProperty("EmpSubmit"))).click();
+		Thread.sleep(1000);
+		
+		Actval=driver.switchTo().alert().getText();
+		Thread.sleep(1000);
+		driver.switchTo().alert().accept();
+		if(Actval.contains(Expval))
+		{
+			System.out.println("Employee Created");
+		}
+		else
+		{
+			System.out.println("Employee Already Existed");
+		}
+		
+		
+		return Actval;
+	}
+	
+	public void AdmLogOut() throws InterruptedException
+	{
+		driver.findElement(By.xpath(Pr.getProperty("Logout")));
+		Thread.sleep(1000);
+	}
+	
+	public void AppClose()
+	{
+		driver.close();
+	}
+
+}

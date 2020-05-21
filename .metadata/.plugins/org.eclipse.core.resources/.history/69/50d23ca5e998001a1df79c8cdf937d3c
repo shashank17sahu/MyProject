@@ -1,0 +1,73 @@
+package mvnpackage;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Test;
+
+public class MVN {
+	String Expval;
+	WebDriver driver;
+	@Test
+	public void login() throws InterruptedException 
+	{
+		String Expval="Ranford Bank";
+		WebDriver driver=new FirefoxDriver();
+		driver.get("http://183.82.100.55/ranford2");
+		driver.manage().window().maximize();
+		
+		String Actval=driver.findElement(By.xpath("/html/body/form/table/tbody/tr/td/table/tbody/tr[4]/td/table/tbody/tr[1]/td[4]/p/span")).getText();
+		System.out.println(driver.getTitle());
+		if(Expval.equalsIgnoreCase(Actval))
+		{
+			System.out.println("Ranford Application Launched");
+		}
+		else
+		{
+			System.out.println("Ranford Application not Launched");
+		}
+	
+		//Home Page
+		driver.findElement(By.xpath("//*[@id=\"txtuId\"]")).sendKeys("Admin");
+		driver.findElement(By.xpath("//*[@id=\"txtPword\"]")).sendKeys("M1ndq");
+		driver.findElement(By.xpath("//*[@id=\"login\"]")).click();
+		Thread.sleep(5000);
+		Expval="Welcome to Admin";
+		if(Expval.equalsIgnoreCase(Actval))
+		{
+			System.out.println("Admin Login Successfully");
+		}
+		else
+		{
+			System.out.println("Admin Login Fial");
+		}
+	}
+	@Test
+	public void role() throws InterruptedException
+	{
+		//Home Button
+		driver.findElement(By.xpath("//img[@src='images/admin_but_01.jpg']")).click();
+		Thread.sleep(5000);
+		//Role Button
+		driver.findElement(By.xpath("//img[@src='images/Roles_but.jpg']")).click();
+		Thread.sleep(2000);
+		//New Role Creation
+		driver.findElement(By.xpath("//*[@id=\"btnRoles\"]")).click();
+		Thread.sleep(2000);
+		//Filling Details
+		driver.findElement(By.xpath("//*[@id=\"txtRname\"]")).sendKeys("medicalchowk");
+		driver.findElement(By.xpath("//*[@id=\"txtRDesc\"]")).sendKeys("medical chowk");
+		driver.findElement(By.xpath("/html/body/div/form/div/table[1]/tbody/tr[4]/td[2]/select/option[2]")).click();
+		driver.findElement(By.xpath("//*[@id=\"btninsert\"]")).click();
+		Thread.sleep(2000);
+		String alert=driver.switchTo().alert().getText();
+		System.out.println(alert);
+		driver.switchTo().alert().accept();
+		
+		driver.findElement(By.xpath("//img[@src='images/admin_but_01.jpg']")).click();
+		Thread.sleep(1000);
+	}	
+		
+
+}
+
